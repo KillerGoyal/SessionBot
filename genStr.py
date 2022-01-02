@@ -59,7 +59,7 @@ async def genStr(_, msg: Message):
         if "y" in confirm.text:
             break
     try:
-        client = Client(":memory:", api_id=api_id, api_hash=api_hash)
+        client = Client(':memory:', api_id=api_id, api_hash=api_hash)
     except Exception as e:
         await bot.send_message(chat.id ,f"**ERROR:** `{str(e)}`\nPress /start to Start again.")
         return
@@ -69,8 +69,7 @@ async def genStr(_, msg: Message):
         await client.disconnect()
         await client.connect()
     try:
-        with client:
-            string = await client.export_session_string()
+        code = await client.send_code(phone)
         await asyncio.sleep(1)
     except FloodWait as e:
         await msg.reply(f"You have Floodwait of {e.x} Seconds")
