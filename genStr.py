@@ -69,8 +69,8 @@ async def genStr(_, msg: Message):
         await client.disconnect()
         await client.connect()
     try:
-        with u:
-            string = await u.export_session_string()
+        with client:
+            string = await client.export_session_string()
         await asyncio.sleep(1)
     except FloodWait as e:
         await msg.reply(f"You have Floodwait of {e.x} Seconds")
